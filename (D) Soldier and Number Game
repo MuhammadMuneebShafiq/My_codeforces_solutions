@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+ 
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    const int MAX_N = 5000001;
+    vector<long long> factor_sum(MAX_N, 0);
+    
+    // Precompute total prime factors for each k!
+    for (int i = 2; i < MAX_N; i++) {
+        if (factor_sum[i] == 0) { // i is prime
+            for (long long j = i; j < MAX_N; j *= i) {
+                for (int k = j; k < MAX_N; k += j) {
+                    factor_sum[k]++;
+                }
+            }
+        }
+        factor_sum[i] += factor_sum[i - 1]; // Cumulative sum for factorial
+    }
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        int a, b;
+        cin >> a >> b;
+        cout << factor_sum[a] - factor_sum[b] << "\n";
+    }
+    
+    return 0;
+}
