@@ -1,0 +1,17 @@
+from math import factorial
+for _ in range(int(input())):
+    n , k , x = map(int,input().split())
+    
+    if k > n:
+        print('NO')
+        continue
+    
+    mx_sm = (n*(n+1))//2 - ((n-k)*((n-k)+1))//2
+ 
+    mn_sm = (k*(k+1))//2
+ 
+      
+    if x > mx_sm or x < mn_sm:
+        print('NO')
+    else:
+        print('YES')
