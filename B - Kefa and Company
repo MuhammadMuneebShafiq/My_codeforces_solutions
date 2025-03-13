@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n, d;
+    cin >> n >> d;
+    vector<pair<int, int>> friends(n);
+    for(int i = 0; i < n; i++) {
+        cin >> friends[i].first >> friends[i].second;
+    }
+    sort(friends.begin(), friends.end());
+    long long max_sum = 0;
+    long long current_sum = 0;
+    int left = 0;
+    for(int right = 0; right < n; right++) {
+        current_sum += friends[right].second;
+        while(friends[right].first - friends[left].first >= d) {
+            current_sum -= friends[left].second;
+            left++;
+        }
+        if(current_sum > max_sum) {
+            max_sum = current_sum;
+        }
+    }
+    cout << max_sum << endl;
+    return 0;
+}
