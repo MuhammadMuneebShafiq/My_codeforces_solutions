@@ -1,0 +1,42 @@
+def count_geometric_progressions(n, k, a):
+    from collections import defaultdict
+ 
+    
+    left = defaultdict(int)
+    right = defaultdict(int)
+ 
+    
+    for num in a:
+        right[num] += 1
+ 
+    result = 0
+ 
+    
+    for x in a:
+       
+        right[x] -= 1
+ 
+      
+        if x % k == 0:  # x must be divisible by k to have a valid first element
+            first_element = x // k
+            third_element = x * k
+ 
+            # Count the number of valid subsequences
+            result += left[first_element] * right[third_element]
+ 
+        
+        left[x] += 1
+ 
+    return result
+ 
+ 
+
+if __name__ == "__main__":
+    # Read n and k
+    n, k = map(int, input().split())
+    
+    
+    a = list(map(int, input().split()))
+    
+  
+    print(count_geometric_progressions(n, k, a))
