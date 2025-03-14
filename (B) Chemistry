@@ -1,0 +1,22 @@
+for _ in range(int(input())):
+    n , k = map(int , input().split())
+    s = input()
+    visited = set()
+    cnt = 0
+    for r in s:
+        if r not in visited:
+            if s.count(r) %2 != 0:
+                cnt +=1
+            visited.add(r)
+    #print(cnt)
+    if (cnt-1) > k:
+        print('NO')
+    elif cnt < k:
+        temp = k - cnt
+        if temp %2 == 0 or (temp -1) %2 == 0:
+            print('YES')
+        else:
+            print('NO')
+    else:
+        print('YES')
+ 
